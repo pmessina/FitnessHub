@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+             xmlns:tools="http://schemas.android.com/tools"
+             android:layout_width="match_parent"
+             android:layout_height="wrap_content"
+             tools:context=".IntervalFragment">
+
+    <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+        <EditText
+                android:id="@+id/edtReps"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:layout_weight="1"
+                android:hint="Reps"
+                android:text=""
+                android:inputType="number"/>
+
+        <EditText
+                android:id="@+id/edtSets"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:layout_weight="1"
+                android:hint="Sets"
+                android:text=""
+                android:inputType="number"/>
+
+
+        <EditText
+                android:id="@+id/edtWeight"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:layout_weight="1"
+                android:inputType="number"
+                android:text=""
+                android:hint="Weight"/>
+
+        <ImageButton
+                android:id="@+id/imgSaveInterval"
+                android:layout_width="50dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:src="@android:drawable/ic_menu_save"/>
+
+
+        <ImageButton
+                android:id="@+id/imgDeleteInterval"
+                android:layout_width="50dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:src="@android:drawable/ic_delete"/>
+    </LinearLayout>
+
+</FrameLayout>
