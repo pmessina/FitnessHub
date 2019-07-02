@@ -3,6 +3,7 @@ package com.fitness.fitnesshub
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.MenuItem
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -51,8 +52,6 @@ class SelectedExercisesActivity : AppCompatActivity() {
 
     private fun setUpExerciseList(exerciseViewModel: ExerciseViewModel) {
         try {
-            //val selectedExerciseList = intent.getSerializableExtra("exercises") as ArrayList<Exercise>
-
             val selectedExerciseAdapter = SelectedExerciseAdapter(exerciseViewModel)
 
             rvSelectedExerciseList.apply{
@@ -61,13 +60,19 @@ class SelectedExercisesActivity : AppCompatActivity() {
                 adapter = selectedExerciseAdapter
             }
 
-
         } catch (ex: Exception) {
             Log.d(TAG, ex.message)
         }
 
+    }
 
+    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
 
+        when (item?.itemId){
+            android.R.id.home -> exerciseViewModel.selectedExercises.clear()
+        }
+
+        return super.onOptionsItemSelected(item)
     }
 
 }

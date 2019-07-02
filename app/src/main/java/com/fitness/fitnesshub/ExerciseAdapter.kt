@@ -53,7 +53,7 @@ class ExerciseHolder(val v: View, val selector: MultiSelector, private val exerc
             val position = view.tag as Int
             val intent = Intent(view.context, IntervalActivity::class.java)
 
-            intent.putExtra("exercise", exerciseViewModel.exerciseList[position])
+            intent.putExtra("exercise", exerciseViewModel.selectedExercises[position])
 
             view.context.startActivity(intent)
         }
@@ -85,6 +85,10 @@ open class ExerciseAdapter(val exerciseViewModel: ExerciseViewModel) :
 
 class SelectedExerciseAdapter(exerciseViewModel: ExerciseViewModel) :
     ExerciseAdapter(exerciseViewModel) {
+
+    override fun getItemCount(): Int {
+        return exerciseViewModel.selectedExercises.size
+    }
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ExerciseHolder {
         val inflater = LayoutInflater.from(parent.context).inflate(R.layout.content_exercise_item, parent, false)
 
@@ -93,6 +97,10 @@ class SelectedExerciseAdapter(exerciseViewModel: ExerciseViewModel) :
         return holder
     }
 
+    override fun onBindViewHolder(holder: ExerciseHolder, position: Int) {
+        holder.textView.text = exerciseViewModel.selectedExercises[position].name
+        holder.textView.tag = position
+    }
 }
 
 

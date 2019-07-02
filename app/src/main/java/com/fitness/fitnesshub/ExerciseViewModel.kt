@@ -17,17 +17,11 @@ class ExerciseViewModel(application: Application) : AndroidViewModel(application
 
     var exerciseList = arrayListOf<Exercise>()
 
-    //private var exerciseAdapter: ExerciseAdapter
-
     private val MAX_SELECTED_EXERCISES = 100
 
     val selectedExercises = arrayListOf<Exercise>()
 
-    //internal var listener: SelectedExerciseListener? = null
-
     private var currentDate: String? = null
-
-    val selector = MultiSelector()
 
     init {
         exerciseList = ArrayList()

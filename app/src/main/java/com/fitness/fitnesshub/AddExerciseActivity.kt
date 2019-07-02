@@ -1,11 +1,10 @@
 package com.fitness.fitnesshub
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
-import com.google.firebase.firestore.FirebaseFirestore
+import androidx.appcompat.app.AppCompatActivity
 import kotlinx.android.synthetic.main.activity_add_exercise.*
 
 class AddExerciseActivity : AppCompatActivity(), TextWatcher {
@@ -31,12 +30,12 @@ class AddExerciseActivity : AppCompatActivity(), TextWatcher {
         btnEditSubmit.setOnClickListener{view ->
 
             val exercise = Exercise(null, edtName.text.toString(), edtMuscleGroup.text.toString(), edtMethod.text.toString())
-            val db = FirebaseFirestore.getInstance()
-
-            db.collection("exercises").add(exercise).addOnSuccessListener {
-                val intent = Intent(this, ExerciseHomeActivity::class.java)
-                startActivity(intent)
-            }
+//            val db = FirebaseFirestore.getInstance()
+//
+//            db.collection("exercises").add(exercise).addOnSuccessListener {
+//                val intent = Intent(this, ExerciseHomeActivity::class.java)
+//                startActivity(intent)
+//            }
 
         }
     }

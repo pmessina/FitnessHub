@@ -3,6 +3,7 @@ package com.fitness.fitnesshub
 import android.content.Intent
 import android.os.Bundle
 import android.os.PersistableBundle
+import android.view.MenuItem
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProviders
@@ -77,21 +78,9 @@ class ExerciseHomeActivity : AppCompatActivity() {//, OnExerciseSelectedListener
         //outState?.putAll(selector.saveSelectionStates())
     }
 
+
     override fun onRestoreInstanceState(savedInstanceState: Bundle?) {
         super.onRestoreInstanceState(savedInstanceState)
-//
-//        val exerciseRepository = ExerciseRepository(application)
-//        val exercises = exerciseRepository.getAllExercises()
-//        val selector = MultiSelector()
-//        selector.restoreSelectionStates(savedInstanceState)
-//
-//        val exerciseAdapter = ExerciseAdapter(exercises, selector, exerciseViewModel)
-//
-//        rvExercises.apply {
-//            setHasFixedSize(true)
-//            layoutManager = LinearLayoutManager(this.context)
-//            adapter = exerciseAdapter
-//        }
 
     }
     override fun onResume() {
@@ -100,33 +89,9 @@ class ExerciseHomeActivity : AppCompatActivity() {//, OnExerciseSelectedListener
 
     }
 
+
+
+
 }
 
 
-
-//fun signIn() {
-
-
-    //FirebaseAuth.getInstance().signInWithEmailAndPassword("pmm0501@gmail.com", "pmpirateNC")
-    //val cred = EmailAuthProvider.getCredential("pmm0501@gmail.com", "pmpirateNC")
-    //FirebaseAuth.getInstance().signInWithCredential(cred)
-//    FirebaseAuth.getInstance().signInAnonymously()
-//        .addOnSuccessListener{
-//                task ->
-//            val user = task.user
-//            Log.d(TAG, user.toString())
-//
-//        }
-//        .addOnFailureListener{
-//                ex -> Log.d(TAG, ex.message)
-//        }
-//
-
-//        val intent = AuthUI.getInstance().createSignInIntentBuilder()
-//            .setAvailableProviders(mutableListOf(AuthUI.IdpConfig.EmailBuilder().build()))
-//            .setIsSmartLockEnabled(false)
-//            .build()
-
-    //startActivityForResult(intent, RC_SIGN_IN)
-
-//}
