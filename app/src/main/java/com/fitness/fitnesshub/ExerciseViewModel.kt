@@ -88,8 +88,8 @@ class IntervalViewModel(application: Application) : AndroidViewModel(application
         exerciseRepository = ExerciseRepository(application)
     }
 
-    fun setInterval(exercise: Exercise, reps: Int, sets: Int, weight: Int) {
-        val interval = Interval(0, exercise.id!!, reps, sets, weight)
+    fun setInterval(id:Int, reps: Int, sets: Int, weight: Int) {
+        val interval = Interval(0, id, reps, sets, weight)
 
         exerciseRepository.insertInterval(interval)
     }
@@ -132,11 +132,11 @@ class IntervalViewModel(application: Application) : AndroidViewModel(application
         Toast.makeText(v.context, "Interval Saved", Toast.LENGTH_SHORT).show()
     }
 
-//    fun onAddIntervalClick(v: View) {
+//    fun onAddIntervalClick(tvInterval: View) {
 //
 //        val mCallback: FragmentCallback
 //
-//        mCallback.onFragmentAddClick(v)
+//        mCallback.onFragmentAddClick(tvInterval)
 //    }
 
     interface FragmentCallback {

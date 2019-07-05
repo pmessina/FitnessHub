@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.util.Log
 import android.view.MenuItem
 import androidx.lifecycle.ViewModelProviders
+import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bignerdranch.android.multiselector.MultiSelector
@@ -31,7 +32,6 @@ class SelectedExercisesActivity : AppCompatActivity() {
         //val exerciseViewModel = ViewModelProviders.of(this).get(ExerciseViewModel::class.java)
 
 
-
 //        dao = ExerciseDatabase.getINSTANCE(this).exerciseDao()
 //
 //        recyclerView = findViewById(R.id.rvSelectedExerciseList)
@@ -52,12 +52,25 @@ class SelectedExercisesActivity : AppCompatActivity() {
 
     private fun setUpExerciseList(exerciseViewModel: ExerciseViewModel) {
         try {
-            val selectedExerciseAdapter = SelectedExerciseAdapter(exerciseViewModel)
+            //val selectedExerciseAdapter = SelectedExerciseAdapter(exerciseViewModel)
 
-            rvSelectedExerciseList.apply{
+            val group = mutableListOf<ExerciseGroup>()
+
+            exerciseViewModel.selectedExercises.forEach { ex ->
+                group.add(ExerciseGroup(ex, mutableListOf(Interval(0, 0, 20, 2, 50),
+                Interval(1, 0, 30, 2, 25),
+                Interval(2, 0, 40, 2, 10))))
+            }
+
+            val animator = rvSelectedExerciseList.itemAnimator as DefaultItemAnimator
+            animator.supportsChangeAnimations = false
+
+            val selectedExerciseAdapter = ExpandableExerciseAdapter(group)
+            rvSelectedExerciseList.apply {
                 setHasFixedSize(true)
                 layoutManager = LinearLayoutManager(this@SelectedExercisesActivity)
                 adapter = selectedExerciseAdapter
+
             }
 
         } catch (ex: Exception) {
@@ -68,7 +81,7 @@ class SelectedExercisesActivity : AppCompatActivity() {
 
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
 
-        when (item?.itemId){
+        when (item?.itemId) {
             android.R.id.home -> exerciseViewModel.selectedExercises.clear()
         }
 

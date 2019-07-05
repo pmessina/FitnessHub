@@ -22,11 +22,13 @@ class IntervalActivity : AppCompatActivity() { //, IntervalViewModel.ExerciseCal
 
     //val exerciseCallback: IntervalViewModel.ExerciseCallback
 
+    lateinit var exercise: Exercise
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_interval)
 
-        val exercise = intent.extras?.getSerializable("exercise") as Exercise
+        exercise = intent.extras?.getSerializable("exercise") as Exercise
 
         val selExercises = exerciseViewModel.selectedExercises
 
@@ -66,9 +68,9 @@ class IntervalActivity : AppCompatActivity() { //, IntervalViewModel.ExerciseCal
                 val sets = Integer.parseInt(edtSets.text.toString());
                 val weight = Integer.parseInt(edtWeight.text.toString());
 
-                //val selectedExercise = exerciseViewModel.getSelectedExercise(v.id)
+                val selectedExercise = exerciseViewModel.selectedExercises
 
-                intervalViewModel.setInterval(Exercise(0), reps, sets, weight);
+                intervalViewModel.setInterval(exercise.id!!, reps, sets, weight)
             }
 
             R.id.imgAddInterval -> {
