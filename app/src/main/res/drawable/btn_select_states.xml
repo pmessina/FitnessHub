@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android"
+          xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <!--<item android:drawable="@android:drawable/ic_menu_add" android:state_pressed="true">-->
+    <!--<shape android:shape="oval" android:thickness="5dp" android:tint="@android:color/darker_gray">-->
+    <!--<solid android:color="@android:color/black"/>-->
+    <!--<size android:width="8dp" android:height="8dp"/>-->
+    <!--</shape>-->
+    <!--</item>-->
+    <item android:drawable="@drawable/plus_selected" android:state_pressed="true">
+    </item>
+    <item android:drawable="@drawable/ic_add">
+    </item>
+
+</selector>

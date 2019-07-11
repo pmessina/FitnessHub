@@ -26,7 +26,7 @@ interface ExerciseDao {
     fun insertInterval(interval: Interval)
 
     @Query("select * from interval where exerciseId = :exerciseId")
-    fun getIntervals(exerciseId: Int): List<Interval>
+    fun getIntervalsById(exerciseId: Int): List<Interval>
 
     @Insert
     fun insertAll(exercises: Array<Exercise>)

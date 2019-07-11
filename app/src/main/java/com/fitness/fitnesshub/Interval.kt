@@ -22,7 +22,7 @@ import java.io.Serializable
 @Parcelize
 data class Interval(@PrimaryKey(autoGenerate = true) val id:Int, val exerciseId:Int, val reps: Int, val sets:Int, val weight:Int): Parcelable{
     override fun toString(): String {
-        return "Id: " + id + "exerciseId: " + exerciseId + " reps: " + reps + "sets: " + sets + "weight: " + weight
+        return if (exerciseId != 0) "Id: " + id + "exerciseId: " + exerciseId + " reps: " + reps + "sets: " + sets + "weight: " + weight  else "No Intervals"
     }
 }
 

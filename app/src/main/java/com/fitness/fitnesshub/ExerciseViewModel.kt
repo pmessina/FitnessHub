@@ -32,6 +32,10 @@ class ExerciseViewModel(application: Application) : AndroidViewModel(application
         }
     }
 
+    fun getIntervals(id: Int): List<Interval> {
+        return exerciseRepository.getIntervals(id)
+    }
+
     fun insertExercise(exercise: Exercise) {
         exerciseRepository.insertExercise(exercise)
     }

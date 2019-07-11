@@ -38,7 +38,7 @@ class IntervalActivity : AppCompatActivity() { //, IntervalViewModel.ExerciseCal
         tvExerciseDate.text = java.time.LocalDate.now().toString()
 
 //9
-//        val intervals = intervalViewModel.getIntervals(exercise.id!!);
+//        val intervals = intervalViewModel.getIntervalsById(exercise.id!!);
 //
 //        for (interval in intervals) {
 //

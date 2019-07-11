@@ -6,6 +6,7 @@ import android.util.Log
 import android.view.MenuItem
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.DefaultItemAnimator
+import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bignerdranch.android.multiselector.MultiSelector
@@ -25,26 +26,7 @@ class SelectedExercisesActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_selected_exercises)
 
-        //setSupportActionBar(toolbar)
         supportActionBar!!.setDisplayHomeAsUpEnabled(true)
-
-//        selectedExerciseViewModel = ViewModelProviders.of(this).get(SelectedExerciseViewModel::class.java)
-        //val exerciseViewModel = ViewModelProviders.of(this).get(ExerciseViewModel::class.java)
-
-
-//        dao = ExerciseDatabase.getINSTANCE(this).exerciseDao()
-//
-//        recyclerView = findViewById(R.id.rvSelectedExerciseList)
-//
-//        recyclerView.setHasFixedSize(true)
-//        recyclerView.setLayoutManager(LinearLayoutManager(this))
-//
-//        exerciseAdapter = SelectedExerciseAdapter(this)
-
-
-//        if (savedInstanceState != null) {
-//            selectedExerciseList = (ArrayList<Exercise>) savedInstanceState.getSerializable("exercises");
-//        }
 
         setUpExerciseList(exerciseViewModel)
 
@@ -54,23 +36,32 @@ class SelectedExercisesActivity : AppCompatActivity() {
         try {
             //val selectedExerciseAdapter = SelectedExerciseAdapter(exerciseViewModel)
 
-            val group = mutableListOf<ExerciseGroup>()
+            val group = arrayListOf<ExerciseGroup>()
 
-            exerciseViewModel.selectedExercises.forEach { ex ->
-                group.add(ExerciseGroup(ex, mutableListOf(Interval(0, 0, 20, 2, 50),
-                Interval(1, 0, 30, 2, 25),
-                Interval(2, 0, 40, 2, 10))))
+            val selectedExercises = exerciseViewModel.selectedExercises
+
+            selectedExercises.forEach {
+                val intervals = exerciseViewModel.getIntervals(it.id!!)
+                if (intervals.isEmpty()){
+                    group.add(ExerciseGroup(it, arrayListOf(Interval(0, 0, 0, 0, 0))))
+                }
+                else {
+                    group.add(ExerciseGroup(it, intervals))
+                }
             }
 
             val animator = rvSelectedExerciseList.itemAnimator as DefaultItemAnimator
             animator.supportsChangeAnimations = false
 
-            val selectedExerciseAdapter = ExpandableExerciseAdapter(group)
+            val rvLayoutManager = LinearLayoutManager(this)
+            val orientation = rvLayoutManager.orientation
+            val itemDecoration = DividerItemDecoration(this@SelectedExercisesActivity, orientation)
+            val selectedExerciseAdapter = ExpandableExerciseAdapter(group, exerciseViewModel)
             rvSelectedExerciseList.apply {
                 setHasFixedSize(true)
-                layoutManager = LinearLayoutManager(this@SelectedExercisesActivity)
+                layoutManager = rvLayoutManager
                 adapter = selectedExerciseAdapter
-
+                addItemDecoration(itemDecoration)
             }
 
         } catch (ex: Exception) {

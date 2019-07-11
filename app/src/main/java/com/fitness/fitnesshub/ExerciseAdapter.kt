@@ -1,8 +1,6 @@
 package com.fitness.fitnesshub
 
 import android.content.Intent
-import android.os.Parcel
-import android.os.Parcelable
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,11 +9,6 @@ import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.bignerdranch.android.multiselector.MultiSelector
 import com.bignerdranch.android.multiselector.SwappingHolder
-import com.thoughtbot.expandablerecyclerview.ExpandableRecyclerViewAdapter
-import com.thoughtbot.expandablerecyclerview.models.ExpandableGroup
-import com.thoughtbot.expandablerecyclerview.viewholders.ChildViewHolder
-import com.thoughtbot.expandablerecyclerview.viewholders.GroupViewHolder
-import java.util.ArrayList
 
 class ExerciseHolder(val v: View, val selector: MultiSelector, private val exerciseViewModel: ExerciseViewModel) :
     SwappingHolder(v, selector) {
@@ -23,12 +16,12 @@ class ExerciseHolder(val v: View, val selector: MultiSelector, private val exerc
     constructor(v: View, exerciseViewModel: ExerciseViewModel)
             : this(v, MultiSelector(), exerciseViewModel)
 
-    var textView = v as TextView
+    val tvExerciseInfo:TextView = v.findViewById(R.id.tvExerciseName)
 
     fun setSelectedExercisesListener() {
-        textView.setOnClickListener {
+        tvExerciseInfo.setOnClickListener {
 
-            val position = v.tag as Int
+            val position = it.tag as Int
 
             if (!selector.isSelectable) {
                 selector.isSelectable = true
@@ -54,17 +47,21 @@ class ExerciseHolder(val v: View, val selector: MultiSelector, private val exerc
     }
 
     fun setExercisesIntervalListener() {
-        textView.setOnClickListener { view ->
+        tvExerciseInfo.setOnClickListener {
 
-            val position = view.tag as Int
-            val intent = Intent(view.context, IntervalActivity::class.java)
+            val position = it.tag as Int
+            val intent = Intent(it.context, IntervalActivity::class.java)
 
             intent.putExtra("exercise", exerciseViewModel.selectedExercises[position])
 
-            view.context.startActivity(intent)
+            it.context.startActivity(intent)
         }
     }
+
+
 }
+
+
 
 open class ExerciseAdapter(val exerciseViewModel: ExerciseViewModel) :
     RecyclerView.Adapter<ExerciseHolder>() {
@@ -75,7 +72,6 @@ open class ExerciseAdapter(val exerciseViewModel: ExerciseViewModel) :
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ExerciseHolder {
         val inflater = LayoutInflater.from(parent.context).inflate(R.layout.content_exercise_item, parent, false)
-
         val selector = MultiSelector()
         val holder = ExerciseHolder(inflater, selector, exerciseViewModel)
         holder.setSelectedExercisesListener()
@@ -83,8 +79,8 @@ open class ExerciseAdapter(val exerciseViewModel: ExerciseViewModel) :
     }
 
     override fun onBindViewHolder(holder: ExerciseHolder, position: Int) {
-        holder.textView.text = exerciseViewModel.exerciseList[position].name
-        holder.textView.tag = position
+        holder.tvExerciseInfo.text = exerciseViewModel.exerciseList[position].name
+        holder.tvExerciseInfo.tag = position
     }
 
 }
@@ -105,50 +101,12 @@ class SelectedExerciseAdapter(exerciseViewModel: ExerciseViewModel) :
     }
 
     override fun onBindViewHolder(holder: ExerciseHolder, position: Int) {
-        holder.textView.text = exerciseViewModel.selectedExercises[position].name
-        holder.textView.tag = position
+        holder.tvExerciseInfo.text = exerciseViewModel.selectedExercises[position].name
+        holder.tvExerciseInfo.tag = position
     }
 }
 
-data class ExerciseGroup(val exercise: Exercise, val intervals: MutableList<Interval>) :
-    ExpandableGroup<Interval>(exercise.name, intervals)
-
-data class ExerciseGroupViewHolder(val v: TextView) : GroupViewHolder(v) {
-
-    fun setGroupTitle(group: ExpandableGroup<in Interval>) {
-
-        v.text = group.getTitle()
-    }
-}
-
-data class IntervalViewHolder(val tvInterval: TextView) : ChildViewHolder(tvInterval) {
-    fun onBind(interval: Interval) {
-        tvInterval.text = interval.toString()
-    }
-}
-
-class ExpandableExerciseAdapter(groups: MutableList<out ExerciseGroup>) : ExpandableRecyclerViewAdapter<ExerciseGroupViewHolder, IntervalViewHolder>(groups) {
-
-    override fun onCreateGroupViewHolder(parent: ViewGroup, viewType: Int): ExerciseGroupViewHolder {
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.content_exercise_item, parent, false) as TextView
-        return ExerciseGroupViewHolder(view)
-    }
-
-    override fun onCreateChildViewHolder(parent: ViewGroup, viewType: Int): IntervalViewHolder {
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.content_exercise_item, parent, false) as TextView
-        return IntervalViewHolder(view)
-    }
-
-    override fun onBindChildViewHolder(holder: IntervalViewHolder?, flatPosition: Int, group: ExpandableGroup<in Interval>, childIndex: Int) {
-        val interval = group.getItems() as MutableList<in Interval>
-        holder!!.tvInterval.text = interval[childIndex].toString()
-    }
-
-    override fun onBindGroupViewHolder(holder: ExerciseGroupViewHolder?, flatPosition: Int, group: ExpandableGroup<in Interval>) {
-        holder!!.setGroupTitle(group)
-    }
 
 
-}
 
 

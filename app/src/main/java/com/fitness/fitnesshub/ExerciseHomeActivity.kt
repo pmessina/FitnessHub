@@ -3,7 +3,9 @@ package com.fitness.fitnesshub
 import android.content.Intent
 import android.os.Bundle
 import android.os.PersistableBundle
+import android.view.Menu
 import android.view.MenuItem
+import android.widget.Toast
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProviders
@@ -61,16 +63,34 @@ class ExerciseHomeActivity : AppCompatActivity() {//, OnExerciseSelectedListener
             adapter = exerciseAdapter
         }
 
-        btnAddExercise.setOnClickListener{
-            view ->
-                val intent = Intent(this, AddExerciseActivity::class.java)
-                startActivity(intent)
+        btnAddExercise.setOnClickListener { view ->
+            val intent = Intent(this, AddExerciseActivity::class.java)
+            startActivity(intent)
         }
 
         btnSubmit.setOnClickListener {
             exerciseViewModel.onClick(it)
         }
         nav_view.setOnNavigationItemSelectedListener(onNavigationItemSelectedListener)
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu): Boolean {
+        menuInflater.inflate(R.menu.action_menu, menu)
+
+        return super.onCreateOptionsMenu(menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+
+        when (item.itemId) {
+            R.id.action_restore -> {
+                ExerciseDatabase.getInstance(this).populateData()
+                Toast.makeText(this, "Data restored to default", Toast.LENGTH_SHORT).show()
+            }
+        }
+
+        return super.onOptionsItemSelected(item)
+
     }
 
     override fun onSaveInstanceState(outState: Bundle?) {
@@ -83,13 +103,12 @@ class ExerciseHomeActivity : AppCompatActivity() {//, OnExerciseSelectedListener
         super.onRestoreInstanceState(savedInstanceState)
 
     }
+
     override fun onResume() {
         super.onResume()
 
 
     }
-
-
 
 
 }

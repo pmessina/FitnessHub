@@ -79,6 +79,6 @@ class ExerciseRepository(application: Application) {
     }
 
     fun getIntervals(exerciseId: Int): List<Interval> {
-        return exerciseDao!!.getIntervals(exerciseId)
+        return exerciseDao!!.getIntervalsById(exerciseId)
     }
 }

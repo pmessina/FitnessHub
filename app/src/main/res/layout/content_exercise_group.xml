@@ -5,21 +5,28 @@
               android:layout_height="wrap_content">
 
     <TextView
-            android:id="@+id/tvExerciseName"
-            android:layout_width="match_parent"
+            android:id="@+id/tvExerciseGroup"
+            android:layout_width="320dp"
             android:layout_margin="2dp"
             android:textSize="16sp"
-            android:layout_height="wrap_content">
+            android:layout_height="match_parent"/>
 
-    </TextView>
+    <ImageButton
+            android:text="Button"
+            android:layout_width="32dp"
+            android:layout_height="match_parent"
+            android:id="@+id/btnAddInterval"
+            android:background="@drawable/btn_select_states"/>
 
     <ImageView
-            android:id="@+id/list_item_genre_arrow"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical|end"
-            android:layout_marginRight="@dimen/activity_horizontal_margin"
+            android:id="@+id/list_item_exercise_arrow"
+            android:layout_width="32dp"
+            android:layout_height="match_parent"
             android:src="@drawable/ic_arrow_down"/>
 
 </LinearLayout>
+
+
+        <!--android:layout_gravity="center_vertical|end"-->
+        <!--android:layout_marginRight="@dimen/activity_horizontal_margin"-->
 

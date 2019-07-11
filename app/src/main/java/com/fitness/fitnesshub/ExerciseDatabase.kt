@@ -74,7 +74,7 @@ abstract class ExerciseDatabase : RoomDatabase() {
                         .fallbackToDestructiveMigration()
                         .build()
 
-                    INSTANCE!!.populateData()
+                    //INSTANCE!!.populateData()
 
                 }
                 return INSTANCE as ExerciseDatabase

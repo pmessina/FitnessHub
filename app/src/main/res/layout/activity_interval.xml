@@ -54,16 +54,6 @@
 
         </LinearLayout>
 
-        <!--<LinearLayout-->
-        <!--android:id="@+id/existingIntervals"-->
-        <!--android:layout_width="wrap_content"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:orientation="vertical">-->
-
-        <!--&lt;!&ndash; Existing intervals go here &ndash;&gt;-->
-
-        <!--</LinearLayout>-->
-
         <LinearLayout
                 android:id="@+id/newIntervals"
                 android:layout_width="match_parent"
