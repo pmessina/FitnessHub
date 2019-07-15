@@ -73,9 +73,6 @@ abstract class ExerciseDatabase : RoomDatabase() {
                         .allowMainThreadQueries()
                         .fallbackToDestructiveMigration()
                         .build()
-
-                    //INSTANCE!!.populateData()
-
                 }
                 return INSTANCE as ExerciseDatabase
             }

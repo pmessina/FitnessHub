@@ -4,6 +4,7 @@ import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
@@ -17,9 +18,11 @@ class ExerciseHolder(val v: View, val selector: MultiSelector, private val exerc
             : this(v, MultiSelector(), exerciseViewModel)
 
     val tvExerciseInfo:TextView = v.findViewById(R.id.tvExerciseName)
+    val tvExerciseMethod:TextView = v.findViewById(R.id.tvExerciseMethod)
+    val exerciseRecord:LinearLayout = v.findViewById(R.id.exerciseRecord)
 
     fun setSelectedExercisesListener() {
-        tvExerciseInfo.setOnClickListener {
+        exerciseRecord.setOnClickListener {
 
             val position = it.tag as Int
 
@@ -80,7 +83,8 @@ open class ExerciseAdapter(val exerciseViewModel: ExerciseViewModel) :
 
     override fun onBindViewHolder(holder: ExerciseHolder, position: Int) {
         holder.tvExerciseInfo.text = exerciseViewModel.exerciseList[position].name
-        holder.tvExerciseInfo.tag = position
+        holder.exerciseRecord.tag = position
+        holder.tvExerciseMethod.text = exerciseViewModel.exerciseList[position].method
     }
 
 }

@@ -36,14 +36,14 @@ data class ExerciseGroupViewHolder(val view: View, val exerciseViewModel: Exerci
     }
 
     private fun animateExpand() {
-        val rotate = RotateAnimation(360f, 180f, Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f)
+        val rotate = RotateAnimation(180f, 360f, Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f)
         rotate.duration = 300
         rotate.fillAfter = true
         image.animation = rotate
     }
 
     private fun animateCollapse() {
-        val rotate = RotateAnimation(180f, 360f, Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f)
+        val rotate = RotateAnimation(360f, 180f, Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f)
         rotate.duration = 300
         rotate.fillAfter = true
         image.animation = rotate
