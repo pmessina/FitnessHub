@@ -22,30 +22,29 @@ abstract class ExerciseDatabase : RoomDatabase() {
             this.beginTransaction()
 
             val exercises = arrayOf(
-                Exercise(null,"Bicep Curls", "Biceps", "Barbells"),
-                Exercise(null,"Tricep Extension", "Triceps", "Barbells"),
-                Exercise(null,"Skull Crushers", "Triceps", "Barbells"),
-                Exercise(null,"Leg Press", "Quadriceps", "Machine"),
-                Exercise(null,"Back Extension", "Back", "Barbells"),
-                Exercise(null,"Shoulder Press", "Shoulders", "Barbells"),
-                Exercise(null,"Bent over Row", "Shoulders", "Barbells"),
-                Exercise(null,"Front Raises", "Shoulders", "Barbells"),
-                Exercise(null,"Lateral Raises", "Shoulders", "Barbells"),
-                Exercise(null,"Reverse Bridge Dips", "Triceps", "Weightless"),
-                Exercise(null,"Pushups", "Chest", "Weightless"),
-                Exercise(null,"Chest Fly", "Chest", "Barbells"),
-                Exercise(null,"One Arm Pushup Left/Right", "Abs", "Weightless"),
-                Exercise(null,"Hi Lo Plank", "Abs", "Weightless"),
-                Exercise(null,"High Side Planks Left/Right", "Arms", "Weightless"),
-                Exercise(null,"Reverse Plank Dips", "Triceps", "Weightless")
+                Exercise(null, "Bicep Curls", "Biceps", "Barbells"),
+                Exercise(null, "Tricep Extension", "Triceps", "Barbells"),
+                Exercise(null, "Skull Crushers", "Triceps", "Barbells"),
+                Exercise(null, "Leg Press", "Quadriceps", "Machine"),
+                Exercise(null, "Back Extension", "Back", "Barbells"),
+                Exercise(null, "Shoulder Press", "Shoulders", "Barbells"),
+                Exercise(null, "Bent over Row", "Shoulders", "Barbells"),
+                Exercise(null, "Front Raises", "Shoulders", "Barbells"),
+                Exercise(null, "Lateral Raises", "Shoulders", "Barbells"),
+                Exercise(null, "Reverse Bridge Dips", "Triceps", "Weightless"),
+                Exercise(null, "Pushups", "Chest", "Weightless"),
+                Exercise(null, "Chest Fly", "Chest", "Barbells"),
+                Exercise(null, "One Arm Pushup Left/Right", "Abs", "Weightless"),
+                Exercise(null, "Hi Lo Plank", "Abs", "Weightless"),
+                Exercise(null, "High Side Planks Left/Right", "Arms", "Weightless"),
+                Exercise(null, "Reverse Plank Dips", "Triceps", "Weightless")
             )
 
 
             exerciseDao().insertAll(exercises)
             setTransactionSuccessful()
             this.endTransaction()
-        }
-        else{
+        } else {
             this.beginTransaction()
             exerciseDao().removeAll()
             populateData()
@@ -57,9 +56,9 @@ abstract class ExerciseDatabase : RoomDatabase() {
     companion object {
         private var INSTANCE: ExerciseDatabase? = null
 
-            fun getInstance(context: Context): ExerciseDatabase {
-                if (INSTANCE == null) {
-                    INSTANCE = Room.databaseBuilder(context, ExerciseDatabase::class.java, "exercise_db")
+        fun getInstance(context: Context): ExerciseDatabase {
+            if (INSTANCE == null) {
+                INSTANCE = Room.databaseBuilder(context, ExerciseDatabase::class.java, "exercise_db")
                     .addCallback(object : Callback() {
                         override fun onCreate(@NonNull db: SupportSQLiteDatabase) {
                             super.onCreate(db)
@@ -70,12 +69,12 @@ abstract class ExerciseDatabase : RoomDatabase() {
 
                     })
 
-                        .allowMainThreadQueries()
-                        .fallbackToDestructiveMigration()
-                        .build()
-                }
-                return INSTANCE as ExerciseDatabase
+                    .allowMainThreadQueries()
+                    .fallbackToDestructiveMigration()
+                    .build()
             }
+            return INSTANCE as ExerciseDatabase
         }
-
     }
+
+}

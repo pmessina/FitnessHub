@@ -51,26 +51,34 @@ class ExerciseHomeActivity : AppCompatActivity() {//, OnExerciseSelectedListener
         setContentView(R.layout.activity_exercise_home)
 
         val exerciseRepository = ExerciseRepository(application)
-        val exercises = exerciseRepository.getAllExercises()
 
-        exerciseViewModel.exerciseList = exercises
+        try{
 
-        val exerciseAdapter = ExerciseAdapter(exerciseViewModel)
+            val exercises = exerciseRepository.getAllExercises()
+            exerciseViewModel.exerciseList = exercises
+            val exerciseAdapter = ExerciseAdapter(exerciseViewModel)
+            rvExercises.apply {
+                setHasFixedSize(true)
+                layoutManager = LinearLayoutManager(this.context)
+                adapter = exerciseAdapter
+            }
 
-        rvExercises.apply {
-            setHasFixedSize(true)
-            layoutManager = LinearLayoutManager(this.context)
-            adapter = exerciseAdapter
+            btnAddExercise.setOnClickListener { view ->
+                val intent = Intent(this, AddExerciseActivity::class.java)
+                startActivity(intent)
+            }
+
+            btnSubmit.setOnClickListener {
+                exerciseViewModel.onClick(it)
+            }
+        }
+        catch(e: Exception){
+            Toast.makeText(this, e.message, Toast.LENGTH_LONG).show()
+            e.printStackTrace()
         }
 
-        btnAddExercise.setOnClickListener { view ->
-            val intent = Intent(this, AddExerciseActivity::class.java)
-            startActivity(intent)
-        }
 
-        btnSubmit.setOnClickListener {
-            exerciseViewModel.onClick(it)
-        }
+
         nav_view.setOnNavigationItemSelectedListener(onNavigationItemSelectedListener)
     }
 

@@ -10,11 +10,17 @@
               tools:showIn="@layout/activity_selected_exercises">
 
     <TextView
-            android:id="@+id/tvAvailableExercises"
+            android:id="@+id/tvSelectedExercises"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Selected Exercises"
-            android:layout_margin="8dp"/>
+            android:layout_margin="10dp"/>
+    <TextView
+            android:id="@+id/tvAvailableExercises"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Select an exercise to see it's intervals"
+            android:layout_margin="6dp"/>
 
     <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rvSelectedExerciseList"
